@@ -5,10 +5,10 @@ import { HttpClient } from '@angular/common/http'
   providedIn: 'root'
 })
 export class PokemonService {
-  urlApi = 'https://pokeapi.co/api/v2/pokemon'
+  urlApi = 'https://pokeapi.co/api/v2'
   constructor(private http: HttpClient) { }
 
-  getPokemon(){
-    return this.http.get<any>(this.urlApi)
+  getPokemon(index:string){
+    return this.http.get<any>(`${this.urlApi}/pokemon/${index}`)
   }
 }

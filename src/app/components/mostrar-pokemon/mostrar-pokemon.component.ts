@@ -7,14 +7,29 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./mostrar-pokemon.component.css']
 })
 export class MostrarPokemonComponent implements OnInit {
-  num: any = [1, 2, 3, 4]
-  data!: any[]
+  
+  data: any[] = []
   constructor(private pokemon: PokemonService) { }
   ngOnInit(): void {
     this.getPokemons()
   }
 
   getPokemons() {
-    this.pokemon.getPokemon().subscribe(pokemon => this.data = pokemon)
+    let pokemonData
+    for (let i = 1; i < 150; i++) {
+      this.pokemon.getPokemon(String(i)).subscribe(
+        res => {
+          pokemonData = {
+            position: i,
+            image: res.sprites.front_default,
+            name: res.name,
+            orden: res.order
+          }
+          this.data.push(pokemonData)
+          console.log(res);
+        }, err => {
+        }
+      )
+    }
   }
 }
