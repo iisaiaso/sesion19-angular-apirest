@@ -1,0 +1,11 @@
+<div class="w-3/4 mx-auto bg-red-200 mt-10">
+  {{data |json}}
+  <div *ngFor="let data of num">
+    <div class="grid grid-cols-4">
+      <div class="bg-yellow-200 m-1">{{ data }}</div>
+      <div>{{ data }}</div>
+      <div>{{ data }}</div>
+      <div>{{ data }}</div>
+    </div>
+  </div>
+</div>
