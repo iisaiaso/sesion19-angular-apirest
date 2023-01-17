@@ -1,5 +1,6 @@
 import { PokemonService } from './../../services/pokemon.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mostrar-pokemon',
@@ -7,11 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./mostrar-pokemon.component.css']
 })
 export class MostrarPokemonComponent implements OnInit {
-  
+
   data: any[] = []
-  constructor(private pokemon: PokemonService) { }
+
+  namePokemon!: string
+
+  constructor(private pokemon: PokemonService, private router: Router) { }
   ngOnInit(): void {
     this.getPokemons()
+    console.log(this.pokemon)
   }
 
   getPokemons() {
@@ -26,10 +31,20 @@ export class MostrarPokemonComponent implements OnInit {
             orden: res.order
           }
           this.data.push(pokemonData)
-          console.log(res);
+          console.log(this.data);
         }, err => {
         }
       )
+    }
+  }
+
+  getSearchPokemon(nPokemon: string) {
+    this.namePokemon = nPokemon
+    if (this.namePokemon != null) {
+      confirm('Quieres buscar pokemon' + " " + this.namePokemon.toUpperCase())
+      this.router.navigate(['detalle/', this.namePokemon.toUpperCase()])
+    } else {
+      alert('Ingrese el nombre del pokemon')
     }
   }
 }
